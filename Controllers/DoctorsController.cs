@@ -49,7 +49,6 @@ namespace Clinic.Controllers
     }
 
     //View doctor => available slots
-
     [HttpGet("{id}/slots")]
     public IEnumerable<String> GetDoctorAvailableSlots(string id)
     {

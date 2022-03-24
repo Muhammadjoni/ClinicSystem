@@ -55,3 +55,11 @@
 /home/jon/code/Muhammadjoni/ClinicSystem/obj/Debug/netcoreapp3.1/ClinicSystem.dll
 /home/jon/code/Muhammadjoni/ClinicSystem/obj/Debug/netcoreapp3.1/ClinicSystem.pdb
 /home/jon/code/Muhammadjoni/ClinicSystem/obj/Debug/netcoreapp3.1/ClinicSystem.genruntimeconfig.cache
+/home/jon/code/Muhammadjoni/ClinicSystem/bin/Debug/netcoreapp3.1/Microsoft.AspNetCore.JsonPatch.dll
+/home/jon/code/Muhammadjoni/ClinicSystem/bin/Debug/netcoreapp3.1/Microsoft.DotNet.PlatformAbstractions.dll
+/home/jon/code/Muhammadjoni/ClinicSystem/bin/Debug/netcoreapp3.1/Microsoft.Extensions.DependencyModel.dll
+/home/jon/code/Muhammadjoni/ClinicSystem/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.dll
+/home/jon/code/Muhammadjoni/ClinicSystem/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.Swagger.dll
+/home/jon/code/Muhammadjoni/ClinicSystem/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerGen.dll
+/home/jon/code/Muhammadjoni/ClinicSystem/bin/Debug/netcoreapp3.1/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/jon/code/Muhammadjoni/ClinicSystem/obj/Debug/netcoreapp3.1/ClinicSystem.MvcApplicationPartsAssemblyInfo.cs
