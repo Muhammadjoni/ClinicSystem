@@ -1,4 +1,4 @@
-namespace Clinic.Models
+namespace ClinicSystem.Models
 {
   public class SlotRequestUpdate
   {

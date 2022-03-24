@@ -1,4 +1,4 @@
-namespace Clinic.Models
+namespace ClinicSystem.Models
 {
   // [Index(nameof(email), IsUnique = true)]
   public class User
