@@ -11,7 +11,7 @@ namespace ClinicSystem.DB
     {
     }
 
-    // public DbSet<User> User { get; set; }
+    public DbSet<User> User { get; set; }
     public DbSet<Appointment> Appointment { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
