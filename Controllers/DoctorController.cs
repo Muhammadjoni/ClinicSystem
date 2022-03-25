@@ -11,15 +11,14 @@ namespace Clinic.Controllers
   [Authorize]
   [ApiController]
   [Route("api/doctors")]
-  public class DoctorsController : ControllerBase
+  public class DoctorController : ControllerBase
   {
     private readonly ApplicationDbContext context;
-    public DoctorsController(ApplicationDbContext context)
+    public DoctorController(ApplicationDbContext context)
     {
       this.context = context;
     }
 
-    //View list of doctors
     [HttpGet]
     public IEnumerable<String> GetAllDoctors()
     {
@@ -28,14 +27,14 @@ namespace Clinic.Controllers
       List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(drRoleID)).Select(x => x.UserId).ToList();
       List<String> drs = new List<string>();
 
-      foreach (var n in drIds)
-      {
-        drs.Add(context.Users.Where(d => d.Id.Equals(n)).Select(x => x.UserName).Single());
-      }
+          foreach (var n in drIds)
+          {
+            drs.Add(context.Users.Where(d => d.Id.Equals(n)).Select(x => x.UserName).Single());
+          }
 
       return drs;
-    }
 
+    }
 
     //View doctor information
     [HttpGet("{id}")]
@@ -69,7 +68,8 @@ namespace Clinic.Controllers
         double mins = timeSpan.TotalMinutes;
         totalDuration += mins; // total of mins allocated from all appointments
 
-        string unAvailableSlot = se.startDuration.ToString("H:mm") + "-" + se.endDuration.ToString("H:mm");
+        string unAvailableSlot = se.startDuration.ToString("H:mm") + "-" + se.endDuration.ToString("H:mm");   //MM/DD/YYYY H:mm
+
         uslots.Add(unAvailableSlot);
 
         //storing slots in a list (start,end)
@@ -120,7 +120,6 @@ namespace Clinic.Controllers
 
       for (int i = 0; i < ids.Count; i++)
       {
-
         DocSlot dr = new DocSlot();
         dr.DoctorId = ids[i];
         dr.Slots = GetDoctorAvailableSlots(ids[i]).ToList();

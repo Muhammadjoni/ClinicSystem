@@ -14,14 +14,12 @@ using Newtonsoft.Json;
 
 namespace ClinicSystem.Controllers
 {
-  public class AppointmentController : ControllerBase
-  {
     [ApiController]
-    [Route("api/appointments")]
-    public class AppointmentsController : ControllerBase
+    [Route("api/slots")]
+    public class AppointmentController : ControllerBase
     {
       private readonly ApplicationDbContext context;
-      public AppointmentsController(ApplicationDbContext context)
+      public AppointmentController(ApplicationDbContext context)
       {
         this.context = context;
       }
@@ -97,5 +95,5 @@ namespace ClinicSystem.Controllers
         return info;
       }
     }
-  }
+
 }
