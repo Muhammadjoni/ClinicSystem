@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "sFcHmOOOp80F3BzcGt2vcYv+gpcZzzOfOYEVrVP7bAT572zJlTv+8ypPxbALi0cOh06yllXmfsJRMbMrsdBpvg==",
+  "dgSpecHash": "e1e/zthhzn+/5Uwvq9ncr/MgrDQbMfvxzbAxFg9fZ/imgbdnEwUQu2uWbJyT/18KWEr0qYAJfowkAUBrQ038kA==",
   "success": true,
   "projectFilePath": "/home/jon/code/Muhammadjoni/ClinicSystem/ClinicSystem.csproj",
   "expectedPackageFiles": [
@@ -9,8 +9,6 @@
     "/home/jon/.nuget/packages/microsoft.aspnetcore.authentication.cookies/2.2.0/microsoft.aspnetcore.authentication.cookies.2.2.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.0/microsoft.aspnetcore.authentication.jwtbearer.3.1.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.authorization/2.0.0/microsoft.aspnetcore.authorization.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.authorization.policy/2.0.0/microsoft.aspnetcore.authorization.policy.2.0.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.cryptography.internal/3.1.0/microsoft.aspnetcore.cryptography.internal.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/3.1.0/microsoft.aspnetcore.cryptography.keyderivation.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.dataprotection/2.2.0/microsoft.aspnetcore.dataprotection.2.2.0.nupkg.sha512",
@@ -23,22 +21,11 @@
     "/home/jon/.nuget/packages/microsoft.aspnetcore.http.features/2.2.0/microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.identity/2.2.0/microsoft.aspnetcore.identity.2.2.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.identity.entityframeworkcore/3.1.0/microsoft.aspnetcore.identity.entityframeworkcore.3.1.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.jsonpatch/2.0.0/microsoft.aspnetcore.jsonpatch.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.mvc.abstractions/2.0.0/microsoft.aspnetcore.mvc.abstractions.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.mvc.apiexplorer/2.0.0/microsoft.aspnetcore.mvc.apiexplorer.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.mvc.core/2.0.0/microsoft.aspnetcore.mvc.core.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.mvc.dataannotations/2.0.0/microsoft.aspnetcore.mvc.dataannotations.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.mvc.formatters.json/2.0.0/microsoft.aspnetcore.mvc.formatters.json.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.responsecaching.abstractions/2.0.0/microsoft.aspnetcore.responsecaching.abstractions.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.routing/2.0.0/microsoft.aspnetcore.routing.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.routing.abstractions/2.0.0/microsoft.aspnetcore.routing.abstractions.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.aspnetcore.staticfiles/2.0.0/microsoft.aspnetcore.staticfiles.2.0.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.aspnetcore.webutilities/2.2.0/microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.0/microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.bcl.hashcode/1.1.0/microsoft.bcl.hashcode.1.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.data.sqlclient/1.0.19269.1/microsoft.data.sqlclient.1.0.19269.1.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.dotnet.platformabstractions/2.0.0/microsoft.dotnet.platformabstractions.2.0.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.entityframeworkcore/3.1.0/microsoft.entityframeworkcore.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.entityframeworkcore.abstractions/3.1.0/microsoft.entityframeworkcore.abstractions.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.entityframeworkcore.analyzers/3.1.0/microsoft.entityframeworkcore.analyzers.3.1.0.nupkg.sha512",
@@ -54,14 +41,10 @@
     "/home/jon/.nuget/packages/microsoft.extensions.configuration.binder/3.1.0/microsoft.extensions.configuration.binder.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.dependencyinjection/3.1.0/microsoft.extensions.dependencyinjection.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/3.1.0/microsoft.extensions.dependencyinjection.abstractions.3.1.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.extensions.dependencymodel/2.0.0/microsoft.extensions.dependencymodel.2.0.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.fileproviders.abstractions/2.2.0/microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.extensions.fileproviders.embedded/2.0.0/microsoft.extensions.fileproviders.embedded.2.0.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.hosting.abstractions/2.2.0/microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.identity.core/3.1.0/microsoft.extensions.identity.core.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.identity.stores/3.1.0/microsoft.extensions.identity.stores.3.1.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.extensions.localization/2.0.0/microsoft.extensions.localization.2.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/microsoft.extensions.localization.abstractions/2.0.0/microsoft.extensions.localization.abstractions.2.0.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.logging/3.1.0/microsoft.extensions.logging.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.logging.abstractions/3.1.0/microsoft.extensions.logging.abstractions.3.1.0.nupkg.sha512",
     "/home/jon/.nuget/packages/microsoft.extensions.objectpool/2.2.0/microsoft.extensions.objectpool.2.2.0.nupkg.sha512",
@@ -104,10 +87,6 @@
     "/home/jon/.nuget/packages/runtime.win-arm64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-arm64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "/home/jon/.nuget/packages/runtime.win-x64.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "/home/jon/.nuget/packages/runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0/runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/swashbuckle.aspnetcore/4.0.0/swashbuckle.aspnetcore.4.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/swashbuckle.aspnetcore.swagger/4.0.0/swashbuckle.aspnetcore.swagger.4.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/swashbuckle.aspnetcore.swaggergen/4.0.0/swashbuckle.aspnetcore.swaggergen.4.0.0.nupkg.sha512",
-    "/home/jon/.nuget/packages/swashbuckle.aspnetcore.swaggerui/4.0.0/swashbuckle.aspnetcore.swaggerui.4.0.0.nupkg.sha512",
     "/home/jon/.nuget/packages/system.appcontext/4.3.0/system.appcontext.4.3.0.nupkg.sha512",
     "/home/jon/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
     "/home/jon/.nuget/packages/system.collections/4.3.0/system.collections.4.3.0.nupkg.sha512",
@@ -190,16 +169,5 @@
     "/home/jon/.nuget/packages/system.xml.xmldocument/4.3.0/system.xml.xmldocument.4.3.0.nupkg.sha512",
     "/home/jon/.nuget/packages/system.xml.xmlserializer/4.3.0/system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "ClinicSystem depends on Swashbuckle.AspNetCore (>= 3.1.0) but Swashbuckle.AspNetCore 3.1.0 was not found. An approximate best match of Swashbuckle.AspNetCore 4.0.0 was resolved.",
-      "libraryId": "Swashbuckle.AspNetCore",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.1"
-      ]
-    }
-  ]
+  "logs": []
 }
