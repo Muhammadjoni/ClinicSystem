@@ -23,8 +23,8 @@ namespace Clinic.Controllers
     public IEnumerable<String> GetAllDoctors()
     {
 
-      string drRoleID = context.Roles.Where(d => d.Name.Equals("Doctor")).Select(x => x.Id).Single();
-      List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(drRoleID)).Select(x => x.UserId).ToList();
+      string docRoleID = context.Roles.Where(d => d.Name.Equals("Doctor")).Select(x => x.Id).Single();
+      List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
       List<String> drs = new List<string>();
 
           foreach (var n in drIds)
@@ -36,14 +36,17 @@ namespace Clinic.Controllers
 
     }
 
-    //View doctor information
+    //View doc info
     [HttpGet("{id}")]
     public DocInfo GetDoctorByID(string id)
     {
+      string docRoleID = context.Roles.Where(d => d.Name.Equals("Doctor")).Select(x => x.Id).Single();
+      List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
+
       DocInfo info = new DocInfo();
       info.DoctorId = id;
       info.Username = context.Users.Where(d => d.Id.Equals(id)).Select(x => x.UserName).Single();
-      // info.Slots = context.Appointments.Where(d => d.Id.Equals(id)).ToList();
+
       return info;
     }
 
@@ -52,29 +55,31 @@ namespace Clinic.Controllers
     public IEnumerable<String> GetDoctorAvailableSlots(string id)
     {
 
-      int count = context.Appointment.Where(s => s.DoctorID.Equals(id)).Count();// slot counting
+      int count = context.Appointment.Where(s => s.DoctorID.Equals(id)).Count();
       List<DateTime> startDuration = context.Appointment.Where(s => s.DoctorID.Equals(id)).Select(d => d.StartTime).ToList();
       List<DateTime> endDuration = context.Appointment.Where(s => s.DoctorID.Equals(id)).Select(d => d.EndTime).ToList();
+
       double totalDuration = 0.0;
-      List<String> slots = new List<String>();//available
-      List<String> uslots = new List<String>();// unavailable
+
+      List<String> open = new List<String>();//available
+      List<String> closed = new List<String>();// not available
       List<DateTime> sortedSlots = new List<DateTime>();//sorted list
 
-      var duration = startDuration.Zip(endDuration, (s, e) => new { startDuration = s, endDuration = e });
-      foreach (var se in duration)
+      var duration = startDuration.Zip(endDuration, (st, en) => new { startDuration = st, endDuration = en });
+      foreach (var sten in duration)
       {
         //time difference
-        System.TimeSpan timeSpan = se.endDuration.Subtract(se.startDuration);
+        System.TimeSpan timeSpan = sten.endDuration.Subtract(sten.startDuration);
         double mins = timeSpan.TotalMinutes;
         totalDuration += mins; // total of mins allocated from all appointments
 
-        string unAvailableSlot = se.startDuration.ToString("H:mm") + "-" + se.endDuration.ToString("H:mm");   //MM/DD/YYYY H:mm
+        string unAvailableSlot = sten.startDuration.ToString("H:mm") + "-" + sten.endDuration.ToString("H:mm");   //MM/DD/YYYY H:mm
 
-        uslots.Add(unAvailableSlot);
+        closed.Add(unAvailableSlot);
 
-        //storing slots in a list (start,end)
-        sortedSlots.Add(se.startDuration);
-        sortedSlots.Add(se.endDuration);
+        //storing open in a list (start,end)
+        sortedSlots.Add(sten.startDuration);
+        sortedSlots.Add(sten.endDuration);
       }
 
       // sort the list
@@ -84,12 +89,12 @@ namespace Clinic.Controllers
 
       for (int i = 0; i < sortedSlots.Count / 2; i++)
       {
-        if (sortedSlots[i + 1] != sortedSlots[i + 2])
+        if (sortedSlots[i + 1] != sortedSlots[i + 2])// giving an error
         {
           if (count != 12)
           {
             string slot = sortedSlots[i + 1].ToString("H:mm") + "-" + sortedSlots[i + 2].ToString("H:mm");
-            slots.Add(slot);
+            open.Add(slot);
             count++;
           }
         }
@@ -98,10 +103,10 @@ namespace Clinic.Controllers
       totalDuration /= 60;
 
       if (count == 12 || totalDuration >= 8)
-        return uslots;
+        return closed;
 
       else
-        return slots;
+        return open;
 
     }
     //----------------------------------------------------------------------------------------------------------

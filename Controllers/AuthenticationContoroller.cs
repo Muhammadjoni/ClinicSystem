@@ -29,6 +29,10 @@ namespace Clinic.Authentication
       _configuration = configuration;
     }
 
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -68,6 +72,10 @@ namespace Clinic.Authentication
       return Unauthorized();
     }
 
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
     [HttpPost]
     [Route("register/patient")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
@@ -101,38 +109,8 @@ namespace Clinic.Authentication
       return Ok(new Response { Status = "Success", Message = "User created successfully!" });
     }
 
-    [HttpPost]
-    [Route("register/clinic-admin")]
-    public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
-    {
-      var userExists = await userManager.FindByNameAsync(model.Username);
-      if (userExists != null)
-        return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-      ApplicationUser user = new ApplicationUser()
-      {
-        Email = model.Email,
-        SecurityStamp = Guid.NewGuid().ToString(),
-        UserName = model.Username
-      };
-      var result = await userManager.CreateAsync(user, model.Password);
-      if (!result.Succeeded)
-        return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-
-      if (!await roleManager.RoleExistsAsync(UserRoles.ClinicAdmin))
-        await roleManager.CreateAsync(new IdentityRole(UserRoles.ClinicAdmin));
-      if (!await roleManager.RoleExistsAsync(UserRoles.Doctor))
-        await roleManager.CreateAsync(new IdentityRole(UserRoles.Doctor));
-      if (!await roleManager.RoleExistsAsync(UserRoles.Patient))
-        await roleManager.CreateAsync(new IdentityRole(UserRoles.Patient));
-
-      if (await roleManager.RoleExistsAsync(UserRoles.ClinicAdmin))
-      {
-        await userManager.AddToRoleAsync(user, UserRoles.ClinicAdmin);
-      }
-
-      return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-    }
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     [HttpPost]
@@ -168,5 +146,41 @@ namespace Clinic.Authentication
       return Ok(new Response { Status = "Success", Message = "User created successfully!" });
     }
 
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    [HttpPost]
+    [Route("register/clinic-admin")]
+    public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
+    {
+      var userExists = await userManager.FindByNameAsync(model.Username);
+      if (userExists != null)
+        return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
+
+      ApplicationUser user = new ApplicationUser()
+      {
+        Email = model.Email,
+        SecurityStamp = Guid.NewGuid().ToString(),
+        UserName = model.Username
+      };
+      var result = await userManager.CreateAsync(user, model.Password);
+      if (!result.Succeeded)
+        return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
+
+      if (!await roleManager.RoleExistsAsync(UserRoles.ClinicAdmin))
+        await roleManager.CreateAsync(new IdentityRole(UserRoles.ClinicAdmin));
+      if (!await roleManager.RoleExistsAsync(UserRoles.Doctor))
+        await roleManager.CreateAsync(new IdentityRole(UserRoles.Doctor));
+      if (!await roleManager.RoleExistsAsync(UserRoles.Patient))
+        await roleManager.CreateAsync(new IdentityRole(UserRoles.Patient));
+
+      if (await roleManager.RoleExistsAsync(UserRoles.ClinicAdmin))
+      {
+        await userManager.AddToRoleAsync(user, UserRoles.ClinicAdmin);
+      }
+
+      return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+    }
   }
 }

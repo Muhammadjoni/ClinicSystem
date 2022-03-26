@@ -29,16 +29,16 @@ namespace ClinicSystem.Controllers
       [HttpPost]
       public async Task<Appointment> BookSlot([FromBody] SlotRequest newSlot)
       {
-        Guid gid = Guid.NewGuid();
+        Guid idg = Guid.NewGuid();
         var records = (newSlot).MapProperties<Appointment>();
-        records.Id = gid.ToString();
-        //  records.Status = "Pending";
+        records.Id = idg.ToString();
+        records.Status = "Pending";
         context.Appointment.Add(records);
         await context.SaveChangesAsync();
         return records;
       }
 
-      //Cancel appoinment
+      //Cancel appoinment                //400 Bad Request even if the appointment is there/
       [HttpPatch("cancel/{id}")]
       public async Task CancelSlot(string id)
       {
@@ -75,14 +75,18 @@ namespace ClinicSystem.Controllers
         }
       }
 
-      //View appointment details
+      //View appointment details // not giving back the result
       [HttpGet("{id}")]
       public IEnumerable<Appointment> ViewDetails(string id)
+    // {
+    //   Appointment detail = context.Appointment.Where(d => d.Id.Equals(id)).Single();
+    //   return detail;
+    // }
       {
         return context.Appointment.Where(d => d.Id.Equals(id));
       }
 
-      //View patient appointment history
+      //View patient appointment history // working
       [HttpGet("patient/{id}")]
       public PatientInfo ViewHistory(string id)
       {

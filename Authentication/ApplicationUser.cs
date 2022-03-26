@@ -4,6 +4,5 @@ namespace ClinicSystem.Authentication
 {
   public class ApplicationUser : IdentityUser
   {
-
   }
 }
