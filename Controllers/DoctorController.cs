@@ -36,6 +36,8 @@ namespace Clinic.Controllers
 
     }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+
     //View doc info
     [HttpGet("{id}")]
     public DocInfo GetDoctorByID(string id)
@@ -48,7 +50,10 @@ namespace Clinic.Controllers
       info.Username = context.Users.Where(d => d.Id.Equals(id)).Select(x => x.UserName).Single();
 
       return info;
+
     }
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //View doctor => available slots
     [HttpGet("{id}/slots")]
@@ -65,21 +70,21 @@ namespace Clinic.Controllers
       List<String> closed = new List<String>();// not available
       List<DateTime> sortedSlots = new List<DateTime>();//sorted list
 
-      var duration = startDuration.Zip(endDuration, (st, en) => new { startDuration = st, endDuration = en });
-      foreach (var sten in duration)
+      var duration = startDuration.Zip(endDuration, (str, end) => new { startDuration = str, endDuration = end });
+      foreach (var strend in duration)
       {
         //time difference
-        System.TimeSpan timeSpan = sten.endDuration.Subtract(sten.startDuration);
+        System.TimeSpan timeSpan = strend.endDuration.Subtract(strend.startDuration);
         double mins = timeSpan.TotalMinutes;
         totalDuration += mins; // total of mins allocated from all appointments
 
-        string unAvailableSlot = sten.startDuration.ToString("H:mm") + "-" + sten.endDuration.ToString("H:mm");   //MM/DD/YYYY H:mm
+        string unAvailableSlot = strend.startDuration.ToString("H:mm") + "-" + strend.endDuration.ToString("H:mm");   //MM/DD/YYYY H:mm
 
         closed.Add(unAvailableSlot);
 
         //storing open in a list (start,end)
-        sortedSlots.Add(sten.startDuration);
-        sortedSlots.Add(sten.endDuration);
+        sortedSlots.Add(strend.startDuration);
+        sortedSlots.Add(strend.endDuration);
       }
 
       // sort the list
@@ -109,11 +114,10 @@ namespace Clinic.Controllers
         return open;
 
     }
-    //----------------------------------------------------------------------------------------------------------
-    //--------------------------------                ----------------------------------------------------------
-    //----------------------------------------------------------------------------------------------------------
-    //View availability of all doctors
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //View availability of all doctors
     [HttpGet("available")]
     public IEnumerable<DocSlot> GetAllDoctorsAvailableSlots()
     {
@@ -134,9 +138,9 @@ namespace Clinic.Controllers
 
     }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //View doctors with the most appointments in a given day
-
     [HttpGet("mostSlots")]
     public IEnumerable<DocSlot> DoctorMostSlots()
     {
@@ -152,9 +156,9 @@ namespace Clinic.Controllers
 
     }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //View doctors who have 6+ hours total appointments in a day
-
     [HttpGet("sixHoursPlus")]
     public IEnumerable<DocSlot> DoctorSixHours()
     {

@@ -32,7 +32,7 @@ namespace Clinic.Authentication
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+    //user login
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -73,9 +73,9 @@ namespace Clinic.Authentication
     }
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+    //patient registration endpoint
     [HttpPost]
     [Route("register/patient")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
@@ -112,7 +112,7 @@ namespace Clinic.Authentication
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+    //doctor registration endpoint
     [HttpPost]
     [Route("register/doctor")]
     public async Task<IActionResult> RegisterDoctor([FromBody] RegisterModel model)
@@ -149,7 +149,7 @@ namespace Clinic.Authentication
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+    //clinic-admin registration endpoint
     [HttpPost]
     [Route("register/clinic-admin")]
     public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)

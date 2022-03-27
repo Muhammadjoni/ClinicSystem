@@ -38,6 +38,8 @@ namespace ClinicSystem.Controllers
         return records;
       }
 
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
       //Cancel appoinment                //400 Bad Request even if the appointment is there/
       [HttpPatch("cancel/{id}")]
       public async Task CancelSlot(string id)
@@ -75,6 +77,8 @@ namespace ClinicSystem.Controllers
         }
       }
 
+//---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
       //View appointment details // not giving back the result
       [HttpGet("{id}")]
       public IEnumerable<Appointment> ViewDetails(string id)
@@ -86,12 +90,14 @@ namespace ClinicSystem.Controllers
         return context.Appointment.Where(d => d.Id.Equals(id));
       }
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
       //View patient appointment history // working
       [HttpGet("patient/{id}")]
       public PatientInfo ViewHistory(string id)
       {
-        // get all the patient appointments
-        List<Appointment> patientSlots = context.Appointment.Where(d => d.PatientID.Equals(id)).ToList();
+      // get patient"s all the appointments
+      List<Appointment> patientSlots = context.Appointment.Where(d => d.PatientID.Equals(id)).ToList();
         PatientInfo info = new PatientInfo();
         info.Id = id;
         info.History = patientSlots;
