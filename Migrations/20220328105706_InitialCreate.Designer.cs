@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ClinicSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220324063634_InitialCreate")]
+    [Migration("20220328105706_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,12 +99,43 @@ namespace ClinicSystem.Migrations
                     b.Property<string>("PatientID")
                         .HasColumnType("text");
 
+                    b.Property<string>("PatientInfoId")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PatientInfoId");
+
                     b.ToTable("Appointment");
+                });
+
+            modelBuilder.Entity("ClinicSystem.Models.DocInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DocInfo");
+                });
+
+            modelBuilder.Entity("ClinicSystem.Models.PatientInfo", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PatientInfo");
                 });
 
             modelBuilder.Entity("ClinicSystem.Models.User", b =>
@@ -114,10 +145,16 @@ namespace ClinicSystem.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<string>("DocInfoId")
+                        .HasColumnType("text");
+
                     b.Property<string>("Email")
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PatientInfoId")
                         .HasColumnType("text");
 
                     b.Property<string>("Role")
@@ -127,6 +164,10 @@ namespace ClinicSystem.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DocInfoId");
+
+                    b.HasIndex("PatientInfoId");
 
                     b.ToTable("User");
                 });
@@ -259,6 +300,24 @@ namespace ClinicSystem.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ClinicSystem.Models.Appointment", b =>
+                {
+                    b.HasOne("ClinicSystem.Models.PatientInfo", null)
+                        .WithMany("History")
+                        .HasForeignKey("PatientInfoId");
+                });
+
+            modelBuilder.Entity("ClinicSystem.Models.User", b =>
+                {
+                    b.HasOne("ClinicSystem.Models.DocInfo", "DocInfo")
+                        .WithMany("Users")
+                        .HasForeignKey("DocInfoId");
+
+                    b.HasOne("ClinicSystem.Models.PatientInfo", "PatientInfo")
+                        .WithMany("Users")
+                        .HasForeignKey("PatientInfoId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

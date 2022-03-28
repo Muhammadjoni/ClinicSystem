@@ -7,5 +7,8 @@ namespace ClinicSystem.Models
   {
     public string Id { get; set; }
     public List<Appointment> History { get; set; }
+
+    public ICollection<User> Users { get; set; }
+
   }
 }

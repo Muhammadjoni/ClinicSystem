@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ClinicSystem.Models
 {
@@ -13,6 +14,9 @@ namespace ClinicSystem.Models
 
     public string DoctorID { get; set; }
     public string PatientID { get; set; }
+
+    //Navigation Properties
+    public List<DocInfo> DocInfos { get; set; }
 
   }
 }

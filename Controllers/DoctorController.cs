@@ -5,10 +5,14 @@ using ClinicSystem.Models;
 using ClinicSystem.DB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.Text;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace Clinic.Controllers
 {
-  [Authorize]
+  // [Authorize]
   [ApiController]
   [Route("api/doctors")]
   public class DoctorController : ControllerBase
@@ -40,18 +44,36 @@ namespace Clinic.Controllers
 
     //View doc info
     [HttpGet("{id}")]
-    public DocInfo GetDoctorByID(string id)
+    public async Task GetDoctorByID(string id)
     {
-      string docRoleID = context.Roles.Where(d => d.Name.Equals("Doctor")).Select(x => x.Id).Single();
-      List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
+      try
+        {
+          // DocInfo result = new DocInfo();
 
-      DocInfo info = new DocInfo();
-      info.DoctorId = id;
-      info.Username = context.Users.Where(d => d.Id.Equals(id)).Select(x => x.UserName).Single();
+          // result.Id = id;
+          var result = context.DocInfo.Where(d => d.Id.Equals(id)).Select(x => x.User).SingleOrDefault();
 
-      return info;
-
+          Response.StatusCode = 200;
+          Response.ContentType = "application/json";
+          await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(result)));
+        }
+      catch (Exception e)
+        {
+          Response.StatusCode = 400;
+          Response.ContentType = "application/json";
+          await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(e)));
+        }
     }
+
+      // string doc = context.DocInfo.Where(d => d.Id.Equals(id)).Select(x => x.Id).Single();
+   //   List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
+
+      // DocInfo info = new DocInfo();
+      // // info.Username = context.Users.Where(d => d.Id.Equals(id)).Select(x => x.UserName).SingleOrDefault(); // need to fix this issue => username
+      // info.Username = context.DocInfo.Where(d => d.DoctorId.Equals(id)).SingleOrDefault();
+
+      // return info;
+
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -130,7 +152,7 @@ namespace Clinic.Controllers
       for (int i = 0; i < ids.Count; i++)
       {
         DocSlot dr = new DocSlot();
-        dr.DoctorId = ids[i];
+        dr.Id = ids[i];
         dr.Slots = GetDoctorAvailableSlots(ids[i]).ToList();
         response.Add(dr);
       }
