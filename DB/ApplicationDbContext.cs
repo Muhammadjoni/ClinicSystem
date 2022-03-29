@@ -19,7 +19,7 @@ namespace ClinicSystem.DB
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-      // base.OnModelCreating(modelBuilder);
+      base.OnModelCreating(modelBuilder);
 
       modelBuilder.Entity<DocInfo>()
             .HasOne<Appointment>(s => s.Appointment)

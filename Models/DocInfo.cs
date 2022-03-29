@@ -4,7 +4,7 @@ namespace ClinicSystem.Models
 {
   public class DocInfo
   {
-    public string Id { get; set; }
+    public int Id { get; set; }
     public int UserId { get; set; }
     public User User { get; set; }
     public int AppointmentId { get; set; }

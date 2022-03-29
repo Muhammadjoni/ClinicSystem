@@ -31,7 +31,7 @@ namespace ClinicSystem.Controllers
       {
         Guid idg = Guid.NewGuid();
         var records = (newSlot).MapProperties<Appointment>();
-        records.Id = idg.ToString();
+        // records.Id = idg.ToString();
         records.Status = "Pending";
         context.Appointment.Add(records);
         await context.SaveChangesAsync();

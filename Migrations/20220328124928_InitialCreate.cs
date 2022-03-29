@@ -9,6 +9,22 @@ namespace ClinicSystem.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Appointment",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    DoctorID = table.Column<string>(nullable: true),
+                    PatientID = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointment", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -48,27 +64,19 @@ namespace ClinicSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DocInfo",
+                name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Username = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true)
+                    Email = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DocInfo", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PatientInfo",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PatientInfo", x => x.Id);
+                    table.PrimaryKey("PK_User", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -178,61 +186,30 @@ namespace ClinicSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointment",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    StartTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false),
-                    DoctorID = table.Column<string>(nullable: true),
-                    PatientID = table.Column<string>(nullable: true),
-                    PatientInfoId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Appointment", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Appointment_PatientInfo_PatientInfoId",
-                        column: x => x.PatientInfoId,
-                        principalTable: "PatientInfo",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "User",
+                name: "DocInfo",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Username = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    Role = table.Column<string>(nullable: true),
-                    DocInfoId = table.Column<string>(nullable: true),
-                    PatientInfoId = table.Column<string>(nullable: true)
+                    UserId = table.Column<int>(nullable: false),
+                    AppointmentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_DocInfo", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_User_DocInfo_DocInfoId",
-                        column: x => x.DocInfoId,
-                        principalTable: "DocInfo",
+                        name: "FK_DocInfo_Appointment_AppointmentId",
+                        column: x => x.AppointmentId,
+                        principalTable: "Appointment",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_User_PatientInfo_PatientInfoId",
-                        column: x => x.PatientInfoId,
-                        principalTable: "PatientInfo",
+                        name: "FK_DocInfo_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Appointment_PatientInfoId",
-                table: "Appointment",
-                column: "PatientInfoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -272,21 +249,18 @@ namespace ClinicSystem.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_DocInfoId",
-                table: "User",
-                column: "DocInfoId");
+                name: "IX_DocInfo_AppointmentId",
+                table: "DocInfo",
+                column: "AppointmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_PatientInfoId",
-                table: "User",
-                column: "PatientInfoId");
+                name: "IX_DocInfo_UserId",
+                table: "DocInfo",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Appointment");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -303,7 +277,7 @@ namespace ClinicSystem.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "DocInfo");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -312,10 +286,10 @@ namespace ClinicSystem.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "DocInfo");
+                name: "Appointment");
 
             migrationBuilder.DropTable(
-                name: "PatientInfo");
+                name: "User");
         }
     }
 }

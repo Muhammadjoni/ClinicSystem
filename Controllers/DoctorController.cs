@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using System.Text;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Clinic.Controllers
 {
@@ -27,16 +28,16 @@ namespace Clinic.Controllers
     public IEnumerable<String> GetAllDoctors()
     {
 
-      string docRoleID = context.Roles.Where(d => d.Name.Equals("Doctor")).Select(x => x.Id).Single();
-      List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
-      List<String> drs = new List<string>();
+      string docRoleID = context.Roles.Where(d => d.Name.Equals("Doctor")).Select(x => x.Id).SingleOrDefault();
+      List<String> docIDs = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
+      List<String> docs = new List<string>();
 
-          foreach (var n in drIds)
+          foreach (var n in docIDs)
           {
-            drs.Add(context.Users.Where(d => d.Id.Equals(n)).Select(x => x.UserName).Single());
+            docs.Add(context.Users.Where(d => d.Id.Equals(n)).Select(x => x.Id).Single());
           }
 
-      return drs;
+      return docs;
 
     }
 
@@ -48,10 +49,24 @@ namespace Clinic.Controllers
     {
       try
         {
-          // DocInfo result = new DocInfo();
 
-          // result.Id = id;
-          var result = context.DocInfo.Where(d => d.Id.Equals(id)).Select(x => x.User).SingleOrDefault();
+        // result.Id = id;
+          // string docRoleID = context.Roles.Where(d => d.Name.Equals("Doctor")).Select(x => x.Id).Single();
+          // List<String> docIDs = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
+
+        // DocInfo result = new DocInfo();
+
+
+        // // Adding elements in Hashtable
+        //   result.Add("Username", context.Users.Where(d => d.Id.Equals(id)).Select(x => x.UserName).SingleOrDefault());
+
+        // // Get a collection of the keys.
+        // ICollection c = result.key;
+
+        // // Displaying the contents
+        // foreach (string str in c)
+        //   Console.WriteLine(str + ": " + result[str]);
+          var result = context.Users.Where(d => d.Id.Equals(id)).ToList();
 
           Response.StatusCode = 200;
           Response.ContentType = "application/json";
@@ -66,7 +81,7 @@ namespace Clinic.Controllers
     }
 
       // string doc = context.DocInfo.Where(d => d.Id.Equals(id)).Select(x => x.Id).Single();
-   //   List<String> drIds = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
+   //   List<String> docIDs = context.UserRoles.Where(d => d.RoleId.Equals(docRoleID)).Select(x => x.UserId).ToList();
 
       // DocInfo info = new DocInfo();
       // // info.Username = context.Users.Where(d => d.Id.Equals(id)).Select(x => x.UserName).SingleOrDefault(); // need to fix this issue => username
